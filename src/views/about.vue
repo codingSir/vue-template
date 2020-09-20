@@ -1,27 +1,45 @@
 <template>
-    <div class="about">
-        <p class="label">1、防抖</p>
-        <p class="content">常用在input搜索的时候，控制请求频率。实现方式就是监听键盘输入事件（@keyup），然后每次事件都绑定一个setTimeout，
-        延迟250ms执行，每次执行都取消（clearTimeout）上一次定时器。可以打开调试工具，Console栏里看下效果。</p>
-        <input type="text" v-model="txt" @keyup="handleKeyUp">
-    </div>
+    <a-table :columns="columns" :dataSource="data" :scroll="{ x: 1500, y: 300 }">
+        <a slot="action" slot-scope="text">action</a>
+    </a-table>
 </template>
-
 <script>
+    const columns = [
+        { title: 'Full Name', width: 100, dataIndex: 'name', key: 'name', fixed: 'left' },
+        { title: 'Age', width: 100, dataIndex: 'age', key: 'age', fixed: 'left' },
+        { title: 'Column 1', dataIndex: 'address', key: '1', width: 150 },
+        { title: 'Column 2', dataIndex: 'address', key: '2', width: 150 },
+        { title: 'Column 3', dataIndex: 'address', key: '3', width: 150 },
+        { title: 'Column 4', dataIndex: 'address', key: '4', width: 150 },
+        { title: 'Column 5', dataIndex: 'address', key: '5', width: 150 },
+        { title: 'Column 6', dataIndex: 'address', key: '6', width: 150 },
+        { title: 'Column 7', dataIndex: 'address', key: '7', width: 150 },
+        { title: 'Column 8', dataIndex: 'address', key: '8' },
+        {
+            title: 'Action',
+            key: 'operation',
+            fixed: 'right',
+            width: 100,
+            scopedSlots: { customRender: 'action' },
+        },
+    ];
+
+    const data = [];
+    for (let i = 0; i < 100; i++) {
+        data.push({
+            key: i,
+            name: `Edrward ${i}`,
+            age: 32,
+            address: `London Park no. ${i}`,
+        });
+    }
+
     export default {
         data() {
             return {
-                txt: '',
-                timer: ''
-            }
+                data,
+                columns,
+            };
         },
-        methods: {
-            handleKeyUp() {
-                clearTimeout(this.timer);
-                this.timer = setTimeout(() => {
-                    console.log(this.txt)
-                }, 250);
-            }
-        }
-    }
+    };
 </script>

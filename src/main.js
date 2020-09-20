@@ -7,6 +7,10 @@ import filters from './filters'
 
 import Toast from './components/toast/index'
 Vue.use(Toast);
+import Antd from 'ant-design-vue'
+import 'ant-design-vue/dist/antd.css';
+
+Vue.use(Antd);
 
 Vue.config.productionTip = false
 
@@ -17,6 +21,7 @@ Vue.config.productionTip = false
 //     var vConsole = new VConsole();
 // }
 
+import './permisson'
 // 全局过滤器
 Object.keys(filters).forEach(filterName => {
     Vue.filter(filterName, filters[filterName])
@@ -28,4 +33,4 @@ new Vue({
     store,
     i18n,
     render: h => h(App)
-}).$mount('#app')
+}).$mount('#app');
